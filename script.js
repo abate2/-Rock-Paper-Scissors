@@ -35,17 +35,19 @@ function invertResult(result) {
 function animateSprite(state, who) {
   const img = who === "player" ? playerSprite : cpuSprite;
   const prefix = who === "player" ? "Player" : "Cpu";
+  const stateMap = {
+    win: "Victory",
+    lose: "Lose",
+    draw: "Draw"
+  };
+
   const frames = 10;
   let frame = 0;
 
   const interval = setInterval(() => {
-    const frameStr = String(frame).padStart(3, "3").replace(/^0+/, match => match.length === 3 ? '000' : match);
-    img.src = `sprites/${who}/${prefix}${capitalize(state)}__${frameStr}.png`;
+    const frameStr = String(frame).padStart(3, "3");
+    img.src = `sprites/${who}/${prefix}${stateMap[state]}__${frameStr}.png`;
     frame++;
     if (frame >= frames) clearInterval(interval);
   }, 100);
-}
-
-function capitalize(word) {
-  return word.charAt(0).toUpperCase() + word.slice(1);
 }
