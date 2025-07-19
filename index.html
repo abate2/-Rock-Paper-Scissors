@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -22,4 +22,43 @@
 
   <script src="script.js"></script>
 </body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anime Rock Paper Scissors</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Rock Paper Scissors - Anime Style</h1>
+
+  <div class="game-area">
+    <!-- Player and CPU animated display -->
+    <div class="sprite-container">
+      <h2>You</h2>
+      <div id="player-animation" class="sprite-box"></div>
+    </div>
+
+    <div class="sprite-container">
+      <h2>CPU</h2>
+      <div id="cpu-animation" class="sprite-box"></div>
+    </div>
+  </div>
+
+  <!-- Buttons to choose your move -->
+  <div class="controls">
+    <button onclick="play('rock')">🪨 Rock</button>
+    <button onclick="play('paper')">📄 Paper</button>
+    <button onclick="play('scissors')">✂️ Scissors</button>
+  </div>
+
+  <!-- Game result -->
+  <div id="result" class="result-text"></div>
+
+  <script src="script.js"></script>
+</body>
 </html>
+
