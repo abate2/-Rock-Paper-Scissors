@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anime Rock Paper Scissors</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Anime Rock Paper Scissors</h1>
+  <div class="character">
+    <h2>You vs CPU</h2>
+    <p id="player-choice">Your choice: ❓</p>
+    <p id="cpu-choice">CPU choice: ❓</p>
+  </div>
+  <div class="choices">
+    <button onclick="play('rock')">🪨 Rock</button>
+    <button onclick="play('paper')">📄 Paper</button>
+    <button onclick="play('scissors')">✂️ Scissors</button>
+  </div>
+  <div class="result" id="result">Let's play!</div>
+
+  <script src="script.js"></script>
+</body>
+</html>

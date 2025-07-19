@@ -1,0 +1,27 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #1f1c2c, #928dab);
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
+}
+.character {
+  margin: 1rem;
+}
+.choices button {
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  background-color: #444;
+  color: #fff;
+}
+.choices button:hover {
+  background-color: #666;
+}
+.result {
+  font-size: 2rem;
+  margin-top: 2rem;
+}
