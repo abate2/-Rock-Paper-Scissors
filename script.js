@@ -1,67 +1,54 @@
-function animateSprite(elementId, basePath, frameCount, fps = 10) {
-  let frame = 0;
-  clearInterval(window[elementId + 'Interval']); // prevent overlapping animations
+const playerSprite = document.getElementById("player-sprite");
+const cpuSprite = document.getElementById("cpu-sprite");
+const resultText = document.getElementById("result");
 
-  window[elementId + 'Interval'] = setInterval(() => {
-    const img = document.getElementById(elementId);
-    img.src = `${basePath}${String(frame).padStart(3, '0')}.png`;
-    frame++;
+function play(playerChoice) {
+  const choices = ["rock", "paper", "scissors"];
+  const cpuChoice = choices[Math.floor(Math.random() * choices.length)];
 
-    if (frame >= frameCount) {
-      clearInterval(window[elementId + 'Interval']);
-    }
-  }, 1000 / fps);
-}
-
-
-function play(playerMove) {
-  const choices = ['rock', 'paper', 'scissors'];
-  const cpuMove = choices[Math.floor(Math.random() * choices.length)];
-
-  document.getElementById('player-choice').textContent = `Your choice: ${symbol(playerMove)}`;
-  document.getElementById('cpu-choice').textContent = `CPU choice: ${symbol(cpuMove)}`;
-
-  let playerResult;
-  if (playerMove === cpuMove) {
-    playerResult = 'Draw';
+  let result;
+  if (playerChoice === cpuChoice) {
+    result = "draw";
   } else if (
-    (playerMove === 'rock' && cpuMove === 'scissors') ||
-    (playerMove === 'paper' && cpuMove === 'rock') ||
-    (playerMove === 'scissors' && cpuMove === 'paper')
+    (playerChoice === "rock" && cpuChoice === "scissors") ||
+    (playerChoice === "paper" && cpuChoice === "rock") ||
+    (playerChoice === "scissors" && cpuChoice === "paper")
   ) {
-    playerResult = 'Victory';
+    result = "win";
   } else {
-    playerResult = 'Lose';
+    result = "lose";
   }
 
-  const cpuResult = playerResult === 'Victory' ? 'Lose' : (playerResult === 'Lose' ? 'Victory' : 'Draw');
+  resultText.textContent = `You chose ${playerChoice}. CPU chose ${cpuChoice}. You ${result}!`;
 
-  document.getElementById('result').textContent = playerResult === 'Victory'
-    ? 'You win! 🎉'
-    : playerResult === 'Lose'
-    ? 'You lose! 💀'
-    : "It's a draw! 😐";
-
-  animateSprite('player-sprite', `sprites/player/Player${playerResult}__`, 10);
-  animateSprite('cpu-sprite', `sprites/cpu/Cpu${cpuResult}__`, 10);
+  playSpriteAnimation(result);
 }
 
+function playSpriteAnimation(result) {
+  let playerFolder = "sprites/player";
+  let cpuFolder = "sprites/cpu";
+  let totalFrames = 10;
+  let frame = 0;
 
-function getResult(player, cpu) {
-  if (player === cpu) return "It's a draw!";
-  if (
-    (player === 'rock' && cpu === 'scissors') ||
-    (player === 'paper' && cpu === 'rock') ||
-    (player === 'scissors' && cpu === 'paper')
-  ) return "You win!";
-  return "You lose!";
-}
+  let playerPrefix, cpuPrefix;
 
-
-function symbol(move) {
-  switch (move) {
-    case 'rock': return '⛰️';
-    case 'paper': return '📄';
-    case 'scissors': return '✂️';
+  if (result === "win") {
+    playerPrefix = "PlayerVictory__";
+    cpuPrefix = "CpuLose__";
+  } else if (result === "lose") {
+    playerPrefix = "PlayerLose__";
+    cpuPrefix = "CpuVictory__";
+  } else {
+    playerPrefix = "PlayerDraw__";
+    cpuPrefix = "CpuDraw__";
   }
+
+  const interval = setInterval(() => {
+    const frameStr = frame.toString().padStart(3, "0");
+    playerSprite.src = `${playerFolder}/${playerPrefix}${frameStr}.png`;
+    cpuSprite.src = `${cpuFolder}/${cpuPrefix}${frameStr}.png`;
+
+    frame++;
+    if (frame >= totalFrames) clearInterval(interval);
+  }, 100); // 100ms = 10 FPS
 }
