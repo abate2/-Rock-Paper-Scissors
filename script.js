@@ -60,7 +60,7 @@ function getResult(player, cpu) {
 
 function symbol(move) {
   switch (move) {
-    case 'rock': return '🪨';
+    case 'rock': return '⛰️';
     case 'paper': return '📄';
     case 'scissors': return '✂️';
   }
