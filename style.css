@@ -1,8 +1,10 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background-color: #fdfdfd;
-  color: #333;
+  background: linear-gradient(to right, #1c1c1c, #2e2e2e);
+  color: #f4f4f4;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
@@ -27,9 +29,9 @@ h1 {
   width: 200px;
   height: 200px;
   object-fit: contain;
-  border: 2px solid #ccc;
+  border: 2px solid #555;
   border-radius: 10px;
-  background: #fff;
+  background: #000;
 }
 
 .controls {
@@ -43,19 +45,19 @@ button {
   cursor: pointer;
   border: none;
   border-radius: 8px;
-  background-color: #4caf50;
+  background-color: #ff9800;
   color: white;
   transition: background 0.3s ease;
 }
 
 button:hover {
-  background-color: #388e3c;
+  background-color: #e65100;
 }
 
 .result-text {
   margin-top: 20px;
   font-size: 1.4em;
   font-weight: bold;
+  color: #fff;
 }
-
 
