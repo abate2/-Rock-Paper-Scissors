@@ -4,51 +4,48 @@ const resultText = document.getElementById("result");
 
 function play(playerChoice) {
   const choices = ["rock", "paper", "scissors"];
-  const cpuChoice = choices[Math.floor(Math.random() * choices.length)];
+  const cpuChoice = choices[Math.floor(Math.random() * 3)];
 
-  let result;
-  if (playerChoice === cpuChoice) {
-    result = "draw";
-  } else if (
-    (playerChoice === "rock" && cpuChoice === "scissors") ||
-    (playerChoice === "paper" && cpuChoice === "rock") ||
-    (playerChoice === "scissors" && cpuChoice === "paper")
-  ) {
-    result = "win";
-  } else {
-    result = "lose";
-  }
+  const result = getResult(playerChoice, cpuChoice);
 
   resultText.textContent = `You chose ${playerChoice}. CPU chose ${cpuChoice}. You ${result}!`;
 
-  playSpriteAnimation(result);
+  animateSprite(result, "player");
+  animateSprite(invertResult(result), "cpu");
 }
 
-function playSpriteAnimation(result) {
-  let playerFolder = "sprites/player";
-  let cpuFolder = "sprites/cpu";
-  let totalFrames = 10;
+function getResult(player, cpu) {
+  if (player === cpu) return "draw";
+  if (
+    (player === "rock" && cpu === "scissors") ||
+    (player === "scissors" && cpu === "paper") ||
+    (player === "paper" && cpu === "rock")
+  ) {
+    return "win";
+  }
+  return "lose";
+}
+
+function invertResult(result) {
+  if (result === "win") return "lose";
+  if (result === "lose") return "win";
+  return "draw";
+}
+
+function animateSprite(state, who) {
+  const img = who === "player" ? playerSprite : cpuSprite;
+  const prefix = who === "player" ? "Player" : "Cpu";
+  const frames = 10;
   let frame = 0;
 
-  let playerPrefix, cpuPrefix;
-
-  if (result === "win") {
-    playerPrefix = "PlayerVictory__";
-    cpuPrefix = "CpuLose__";
-  } else if (result === "lose") {
-    playerPrefix = "PlayerLose__";
-    cpuPrefix = "CpuVictory__";
-  } else {
-    playerPrefix = "PlayerDraw__";
-    cpuPrefix = "CpuDraw__";
-  }
-
   const interval = setInterval(() => {
-    const frameStr = frame.toString().padStart(3, "0");
-    playerSprite.src = `${playerFolder}/${playerPrefix}${frameStr}.png`;
-    cpuSprite.src = `${cpuFolder}/${cpuPrefix}${frameStr}.png`;
-
+    const frameStr = String(frame).padStart(3, "0");
+    img.src = `sprites/${who}/${prefix}${capitalize(state)}__${frameStr}.png`;
     frame++;
-    if (frame >= totalFrames) clearInterval(interval);
-  }, 100); // 100ms = 10 FPS
+    if (frame >= frames) clearInterval(interval);
+  }, 100);
+}
+
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
 }

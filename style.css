@@ -1,21 +1,20 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #1c1c1c;
-  color: #fff;
+  font-family: Arial, sans-serif;
   text-align: center;
-  padding: 20px;
+  background-color: #fdfdfd;
+  color: #333;
 }
 
 h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+  font-size: 2em;
+  margin-top: 20px;
 }
 
 .game-area {
   display: flex;
   justify-content: center;
-  gap: 50px;
-  margin-bottom: 20px;
+  gap: 40px;
+  margin: 30px auto;
 }
 
 .sprite-container {
@@ -24,37 +23,38 @@ h1 {
   align-items: center;
 }
 
-.sprite-container h2 {
-  margin-bottom: 10px;
-}
-
 .sprite-container img {
   width: 200px;
-  height: auto;
-  border: 2px solid #444;
-  border-radius: 8px;
-  background-color: #2e2e2e;
+  height: 200px;
+  object-fit: contain;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background: #fff;
 }
 
-.controls button {
-  margin: 0 10px;
+.controls {
+  margin-top: 20px;
+}
+
+button {
+  font-size: 1.2em;
   padding: 10px 20px;
-  font-size: 1.1rem;
+  margin: 10px;
   cursor: pointer;
-  background-color: #444;
-  color: #fff;
   border: none;
-  border-radius: 5px;
-  transition: background 0.3s;
+  border-radius: 8px;
+  background-color: #4caf50;
+  color: white;
+  transition: background 0.3s ease;
 }
 
-.controls button:hover {
-  background-color: #666;
+button:hover {
+  background-color: #388e3c;
 }
 
 .result-text {
   margin-top: 20px;
-  font-size: 1.2rem;
+  font-size: 1.4em;
   font-weight: bold;
 }
 

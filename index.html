@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Anime Rock Paper Scissors</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h1>Rock Paper Scissors - Anime Style</h1>
@@ -12,66 +12,22 @@
   <div class="game-area">
     <div class="sprite-container">
       <h2>You</h2>
-      <img id="player-sprite" src="sprites/player/PlayerDraw__000.png" alt="Player">
+      <img id="player-sprite" src="sprites/player/PlayerDraw__000.png" alt="Player Sprite" />
     </div>
-
     <div class="sprite-container">
       <h2>CPU</h2>
-      <img id="cpu-sprite" src="sprites/cpu/CpuDraw__000.png" alt="CPU">
+      <img id="cpu-sprite" src="sprites/cpu/CpuDraw__000.png" alt="CPU Sprite" />
     </div>
   </div>
 
   <div class="controls">
-    <button onclick="play('rock')">🪨 Rock</button>
+    <button onclick="play('rock')">⛰️ Rock</button>
     <button onclick="play('paper')">📄 Paper</button>
     <button onclick="play('scissors')">✂️ Scissors</button>
   </div>
 
   <div id="result" class="result-text"></div>
 
-  <script>
-    const resultText = document.getElementById("result");
-    const playerSprite = document.getElementById("player-sprite");
-    const cpuSprite = document.getElementById("cpu-sprite");
-
-    const moves = ["rock", "paper", "scissors"];
-
-    function getResult(player, cpu) {
-      if (player === cpu) return "draw";
-      if (
-        (player === "rock" && cpu === "scissors") ||
-        (player === "paper" && cpu === "rock") ||
-        (player === "scissors" && cpu === "paper")
-      ) return "win";
-      return "lose";
-    }
-
-    function animateSprite(basePath, prefix, element) {
-      let frame = 0;
-      const totalFrames = 10;
-      const interval = setInterval(() => {
-        const number = frame.toString().padStart(3, '0');
-        element.src = `${basePath}/${prefix}__${number}.png`;
-        frame++;
-        if (frame >= totalFrames) clearInterval(interval);
-      }, 100);
-    }
-
-    function play(playerMove) {
-      const cpuMove = moves[Math.floor(Math.random() * 3)];
-      const result = getResult(playerMove, cpuMove);
-      resultText.textContent = `You chose ${playerMove}, CPU chose ${cpuMove}. You ${result}!`;
-
-      const playerBase = "sprites/player";
-      const cpuBase = "sprites/cpu";
-
-      const playerPrefix = result === "win" ? "PlayerVictory" : result === "lose" ? "PlayerLose" : "PlayerDraw";
-      const cpuPrefix = result === "win" ? "CpuLose" : result === "lose" ? "CpuVictory" : "CpuDraw";
-
-      animateSprite(playerBase, playerPrefix, playerSprite);
-      animateSprite(cpuBase, cpuPrefix, cpuSprite);
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
-
