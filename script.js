@@ -39,7 +39,7 @@ function animateSprite(state, who) {
   let frame = 0;
 
   const interval = setInterval(() => {
-    const frameStr = String(frame).padStart(3, "0");
+    const frameStr = String(frame).padStart(3, "3").replace(/^0+/, match => match.length === 3 ? '000' : match);
     img.src = `sprites/${who}/${prefix}${capitalize(state)}__${frameStr}.png`;
     frame++;
     if (frame >= frames) clearInterval(interval);
