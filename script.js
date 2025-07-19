@@ -2,6 +2,9 @@ const playerSprite = document.getElementById("player-sprite");
 const cpuSprite = document.getElementById("cpu-sprite");
 const resultText = document.getElementById("result");
 
+let playerInterval;
+let cpuInterval;
+
 function play(playerChoice) {
   const choices = ["rock", "paper", "scissors"];
   const cpuChoice = choices[Math.floor(Math.random() * 3)];
@@ -10,8 +13,11 @@ function play(playerChoice) {
 
   resultText.textContent = `You chose ${playerChoice}. CPU chose ${cpuChoice}. You ${result}!`;
 
-  animateSprite(result, "player");
-  animateSprite(invertResult(result), "cpu");
+  clearInterval(playerInterval);
+  clearInterval(cpuInterval);
+
+  playerInterval = animateSprite(result, "player");
+  cpuInterval = animateSprite(invertResult(result), "cpu");
 }
 
 function getResult(player, cpu) {
@@ -35,19 +41,21 @@ function invertResult(result) {
 function animateSprite(state, who) {
   const img = who === "player" ? playerSprite : cpuSprite;
   const prefix = who === "player" ? "Player" : "Cpu";
-  const stateMap = {
-    win: "Victory",
-    lose: "Lose",
-    draw: "Draw"
-  };
-
   const frames = 10;
   let frame = 0;
 
-  const interval = setInterval(() => {
-    const frameStr = String(frame).padStart(3, "3");
-    img.src = `sprites/${who}/${prefix}${stateMap[state]}__${frameStr}.png`;
+  return setInterval(() => {
+    const frameStr = String(frame).padStart(3, "0");
+    const path = `sprites/${who}/${prefix}${capitalize(state)}__${frameStr}.png`;
+
+    img.src = path;
     frame++;
-    if (frame >= frames) clearInterval(interval);
+    if (frame >= frames) {
+      clearInterval(who === "player" ? playerInterval : cpuInterval);
+    }
   }, 100);
+}
+
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
 }
