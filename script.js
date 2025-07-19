@@ -1,12 +1,16 @@
-function animateSprite(folder, baseName, elementId, frameCount = 10, interval = 100) {
+function animateSprite(elementId, basePath, frameCount, fps = 10) {
   let frame = 0;
-  const element = document.getElementById(elementId);
-  const animation = setInterval(() => {
-    const imagePath = `sprites/${folder}/${baseName}__${String(frame).padStart(3, '0')}.png`;
-    element.style.backgroundImage = `url('${imagePath}')`;
+  clearInterval(window[elementId + 'Interval']); // prevent overlapping animations
+
+  window[elementId + 'Interval'] = setInterval(() => {
+    const img = document.getElementById(elementId);
+    img.src = `${basePath}${String(frame).padStart(3, '0')}.png`;
     frame++;
-    if (frame >= frameCount) clearInterval(animation);
-  }, interval);
+
+    if (frame >= frameCount) {
+      clearInterval(window[elementId + 'Interval']);
+    }
+  }, 1000 / fps);
 }
 
 
@@ -17,7 +21,6 @@ function play(playerMove) {
   document.getElementById('player-choice').textContent = `Your choice: ${symbol(playerMove)}`;
   document.getElementById('cpu-choice').textContent = `CPU choice: ${symbol(cpuMove)}`;
 
-  // Determine result
   let playerResult;
   if (playerMove === cpuMove) {
     playerResult = 'Draw';
@@ -39,11 +42,9 @@ function play(playerMove) {
     ? 'You lose! 💀'
     : "It's a draw! 😐";
 
-  // Animate each sprite accordingly
   animateSprite('player-sprite', `sprites/player/Player${playerResult}__`, 10);
   animateSprite('cpu-sprite', `sprites/cpu/Cpu${cpuResult}__`, 10);
 }
-
 
 
 function getResult(player, cpu) {
