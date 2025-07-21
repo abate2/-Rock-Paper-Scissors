@@ -16,7 +16,7 @@ This is a web-based **Rock-Paper-Scissors** game where the player faces off agai
 - JavaScript
 
 ## Bug to be fixed 
-- The animation only work for one of the parts  involve(cpu or player)
+- The animation only work for one of the parties involve(cpu or player)
 
 ## Demo
 You can try it online here:  
