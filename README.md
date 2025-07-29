@@ -26,7 +26,7 @@ You can try it online here:
 ##  Images Taken from 
 
 - Author pzUH
-(https://opengameart.org/content/temple-run-free-sprite)
+[https://opengameart.org/content/temple-run-free-sprite](https://opengameart.org/content/temple-run-free-sprite)
 
 ## image preview
 -![Game Screenshot](./screenshot.PNG)
